@@ -60,17 +60,26 @@ public class GameManager {
 		} while (numeroDeJugadores > 5 || numeroDeJugadores < 2);
 		return numeroDeJugadores;
 	}
-	
+
 	public static void jugadorQueEmpieza() {
-		switch (key) {
-		case value:
+		int empiezaJugadorNum = (int) (Math.random() * (numeroDeJugadores() + 1)) + 2;
+		switch (empiezaJugadorNum) {
+		case 2:
 			
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+			break;
+		case 5:
+
 			break;
 
 		default:
 			break;
 		}
-		double empiezaJugadorNum = (int) (Math.random() * (numeroDeJugadores() + 1)) + 2;
 	}
 
 	public static void pulsarEnter() {
