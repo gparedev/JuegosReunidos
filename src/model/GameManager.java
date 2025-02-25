@@ -65,16 +65,16 @@ public class GameManager {
 		int empiezaJugadorNum = (int) (Math.random() * (numeroDeJugadores() + 1)) + 2;
 		switch (empiezaJugadorNum) {
 		case 2:
-			
+			System.out.println("Jugaréis 2 jugadores");
 			break;
 		case 3:
-
+			System.out.println("Jugaréis 3 jugadores");
 			break;
 		case 4:
-
+			System.out.println("Jugaréis 4 jugadores");
 			break;
 		case 5:
-
+			System.out.println("Jugaréis 5 jugadores");
 			break;
 
 		default:
