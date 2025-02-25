@@ -51,7 +51,7 @@ public class Puntuaciones {
 		boolean trioBoolean = false;
 		
 		int parFullHouse = 0;
-		
+		int trioFullHouse = 0;
 		
 		int[] Array = { unos, doses, treses, cuatros, cincos, seises };
 		int[] ArrayNumero = { 1, 2, 3, 4, 5, 6 };
@@ -64,7 +64,7 @@ public class Puntuaciones {
 			if (Array[i] >= 3) {
 				trio = CalcTrio(ArrayNumero[i]);
 				trioBoolean = true;
-				trio FullHouse
+				trioFullHouse = ArrayNumero[i];
 			}
 			if (Array[i] >= 4) {
 				cuatroIguales = CalcCuatroIguales(ArrayNumero[i]);
@@ -74,7 +74,7 @@ public class Puntuaciones {
 			}
 		}
 		if (trioBoolean && parBoolean) {
-			fullHouse = 
+			fullHouse = CalcFullHouse(parFullHouse, trioFullHouse);
 		}
 	}
 
@@ -96,4 +96,8 @@ public class Puntuaciones {
 		return yahtzee;
 	}
 
+	int CalcFullHouse(int par, int trio) {
+		int fullHouse = 25;
+		return fullHouse;
+	}
 }
