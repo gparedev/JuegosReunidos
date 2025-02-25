@@ -1,7 +1,6 @@
 package controller;
 
-import model.Dados;
-import model.Jugador;
+import model.*;
 
 public class Main {
 
