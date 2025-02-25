@@ -11,7 +11,7 @@ public class Jugador {
 	private ArrayList<Dados> dadosToChangeJugador = new ArrayList<Dados>();
 	private final int NUMERO_DADOS_JUGADOR = 5;
 	private final int MAXIMO_NUMERO_LANZAMIENTOS = 3;
-
+	
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		numLanzamientos = MAXIMO_NUMERO_LANZAMIENTOS;
