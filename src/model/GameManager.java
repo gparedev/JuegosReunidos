@@ -58,8 +58,8 @@ public class GameManager {
 			sc.nextLine();
 		} while (numeroDeJugadores > 5 || numeroDeJugadores < 2);
 		System.out.println("Jugaréis " + numeroDeJugadores + " jugadores.");
-		for (int i = 1; i < (numeroDeJugadores + 1); i++) {
-			System.out.println("Introduce el nombre del jugador " + i + "/" + numeroDeJugadores + ":");
+		for (int i = 0; i < numeroDeJugadores; i++) {
+			System.out.println("Introduce el nombre del jugador " + (i+1) + "/" + numeroDeJugadores + ":");
 			jugadores.add(new Jugador(sc.nextLine()));
 		}
 		System.out.println("Los jugadores serán:");
