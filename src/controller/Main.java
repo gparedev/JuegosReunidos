@@ -12,6 +12,8 @@ public class Main {
 
 		Jugador jugador1 = new Jugador("Paco");
 		jugador1.tirarDados();
+		
+		GameManager.bienvenida();
 	}
 
 }

@@ -1,8 +1,21 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameManager {
+
+	private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+	private int numeroDeJugadores;
+
+	public GameManager(ArrayList<Jugador> jugadores, int numeroDeJugadores) {
+		this.jugadores = new ArrayList<>();
+		this.numeroDeJugadores = numeroDeJugadores;
+	}
+
+	public GameManager() {
+
+	}
 
 	public static void bienvenida() {
 		System.out.println("Bienvnido a Yahtzee\n");
@@ -18,32 +31,16 @@ public class GameManager {
 		} while (numeroMenu > 3 || numeroMenu < 1);
 		switch (numeroMenu) {
 		case 1:
+			crearJugadores(jugadores);
 			System.out.println("¡Empieza el juego!");
-			numeroDeJugadores();
-			jugadorQueEmpieza();
 			break;
 		case 2:
-			System.out.println("REGLAS DEL YAHTZEE:\r\n"
-					+ "Objetivo: Conseguir la mayor cantidad de puntos lanzando cinco dados y logrando combinaciones específicas.\r\n"
-					+ "\r\n" + "Turno de juego:\r\n" + "\r\n"
-					+ "Cada jugador puede lanzar los dados hasta tres veces por turno.\r\n"
-					+ "Puede reservar algunos dados y relanzar los demás para intentar mejorar su combinación.\r\n"
-					+ "Sección superior (sumar dados de un mismo número):\r\n" + "\r\n"
-					+ "Se puntúa sumando los dados del número elegido (1, 2, 3, 4, 5 o 6).\r\n"
-					+ "Si la suma total es 63 o más, se recibe un bono de 35 puntos.\r\n"
-					+ "Sección inferior (combinaciones especiales):\r\n" + "\r\n"
-					+ "Trío: Tres dados iguales, suma de todos los dados.\r\n"
-					+ "Cuatro iguales: Cuatro dados iguales, suma de todos los dados.\r\n"
-					+ "Full House: Un trío + un par (25 puntos).\r\n"
-					+ "Escalera pequeña: Cuatro números consecutivos (30 puntos).\r\n"
-					+ "Escalera grande: Cinco números consecutivos (40 puntos).\r\n"
-					+ "Chance: Cualquier combinación, suma total de los dados.\r\n"
-					+ "Yahtzee: Cinco dados iguales (50 puntos).\r\n"
-					+ "Gana quien tenga la mayor puntuación al final de la partida.");
+			reglas();
 			pulsarEnter();
 			mostrarMenu();
 			break;
 		case 3:
+			terminarJuego();
 			break;
 
 		default:
@@ -51,34 +48,29 @@ public class GameManager {
 		}
 	}
 
-	public static int numeroDeJugadores() {
+	public static void crearJugadores(ArrayList<Jugador> jugadores) {
 		Scanner sc = new Scanner(System.in);
 		int numeroDeJugadores = 0;
+		String nombre = "";
 		do {
 			System.out.println("Número de jugadores que van a jugar (De 2 a 5 jugadores):");
 			numeroDeJugadores = sc.nextInt();
+			sc.nextLine();
 		} while (numeroDeJugadores > 5 || numeroDeJugadores < 2);
-		return numeroDeJugadores;
+		System.out.println("Jugaréis " + numeroDeJugadores + " jugadores.");
+		for (int i = 1; i < (numeroDeJugadores + 1); i++) {
+			System.out.println("Introduce el nombre del jugador " + i + "/" + numeroDeJugadores + ":");
+			jugadores.add(new Jugador(sc.nextLine()));
+		}
+		System.out.println("Los jugadores serán:");
+		for (int i = 0; i < jugadores.size(); i++) {
+			System.out.println("#" + (i+1) + " " + jugadores.get(i).getNombre());
+		}
 	}
 
-	public static void jugadorQueEmpieza() {
-		int empiezaJugadorNum = (int) (Math.random() * (numeroDeJugadores() + 1)) + 2;
-		switch (empiezaJugadorNum) {
-		case 2:
-			System.out.println("Jugaréis 2 jugadores");
-			break;
-		case 3:
-			System.out.println("Jugaréis 3 jugadores");
-			break;
-		case 4:
-			System.out.println("Jugaréis 4 jugadores");
-			break;
-		case 5:
-			System.out.println("Jugaréis 5 jugadores");
-			break;
-
-		default:
-			break;
+	public void mostrarJugadores() {
+		for (Jugador jugador : jugadores) {
+			jugador.getNombre();
 		}
 	}
 
@@ -86,6 +78,31 @@ public class GameManager {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Pulsa ENTER para continuar");
 		sc.nextLine();
+	}
+
+	public static void reglas() {
+		System.out.println("REGLAS DEL YAHTZEE:\r\n"
+				+ "Objetivo: Conseguir la mayor cantidad de puntos lanzando cinco dados y logrando combinaciones específicas.\r\n"
+				+ "\r\n" + "Turno de juego:\r\n" + "\r\n"
+				+ "Cada jugador puede lanzar los dados hasta tres veces por turno.\r\n"
+				+ "Puede reservar algunos dados y relanzar los demás para intentar mejorar su combinación.\r\n"
+				+ "Sección superior (sumar dados de un mismo número):\r\n" + "\r\n"
+				+ "Se puntúa sumando los dados del número elegido (1, 2, 3, 4, 5 o 6).\r\n"
+				+ "Si la suma total es 63 o más, se recibe un bono de 35 puntos.\r\n"
+				+ "Sección inferior (combinaciones especiales):\r\n" + "\r\n"
+				+ "Trío: Tres dados iguales, suma de todos los dados.\r\n"
+				+ "Cuatro iguales: Cuatro dados iguales, suma de todos los dados.\r\n"
+				+ "Full House: Un trío + un par (25 puntos).\r\n"
+				+ "Escalera pequeña: Cuatro números consecutivos (30 puntos).\r\n"
+				+ "Escalera grande: Cinco números consecutivos (40 puntos).\r\n"
+				+ "Chance: Cualquier combinación, suma total de los dados.\r\n"
+				+ "Yahtzee: Cinco dados iguales (50 puntos).\r\n"
+				+ "Gana quien tenga la mayor puntuación al final de la partida.");
+	}
+
+	public static boolean terminarJuego() {
+		boolean terminar = true;
+		return terminar;
 	}
 
 }
