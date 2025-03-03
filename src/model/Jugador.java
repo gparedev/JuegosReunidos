@@ -1,17 +1,20 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Jugador {
 
 	private String nombre;
 	private int numLanzamientos;
 	private ArrayList<Dados> dadosFinalesJugador = new ArrayList<Dados>();
+	private ArrayList<Dados> dadosACambiar = new ArrayList<Dados>();
 	private ArrayList<Dados> dadosATirarJugador = new ArrayList<Dados>();
-	private ArrayList<Dados> dadosToChangeJugador = new ArrayList<Dados>();
 	private final int NUMERO_DADOS_JUGADOR = 5;
 	private final int MAXIMO_NUMERO_LANZAMIENTOS = 3;
-	
+
+	private Scanner sc = new Scanner(System.in);
+
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		numLanzamientos = MAXIMO_NUMERO_LANZAMIENTOS;
@@ -49,14 +52,6 @@ public class Jugador {
 		this.dadosATirarJugador = dadosATirarJugador;
 	}
 
-	public ArrayList<Dados> getDadosToChangeJugador() {
-		return dadosToChangeJugador;
-	}
-
-	public void setDadosToChangeJugador(ArrayList<Dados> dadosToChangeJugador) {
-		this.dadosToChangeJugador = dadosToChangeJugador;
-	}
-
 	// MÉTODOS VARIOS
 
 	public void tirarDados() {
@@ -67,9 +62,13 @@ public class Jugador {
 			d.tirarDado();
 			contador++;
 		}
-		// Una bez hemos tirado los dados los asignamos a la fase "Final"
+		// Una vez hemos tirado los dados los asignamos a la fase "Final"
 		setDadosFinalesJugador(dadosATirarJugador);
 		numLanzamientos--;
+
+		// Una vez asignados los dados "Finales" Limpiamos la lista de dados a tirar por
+		// si el jugador quiere volver a tirar algunos dados
+		dadosATirarJugador.clear();
 
 	}
 
@@ -78,12 +77,51 @@ public class Jugador {
 			dadosATirarJugador.add(new Dados());
 		}
 	}
-	// Aquí hacer la logica en la que se pregunta que dados quiere cambiar, hasta un máximo de 3.
-	public void preguntarDadosACambiar() {
-		boolean check = false;
-		while (!check) {
-			
+
+	// Aquí hacer la logica en la que se pregunta que dados quiere cambiar.
+	public void cambioDados() {
+		if (numLanzamientos > 0) {
+			int index = 0;
+			switch (index) {
+			case 1:
+				break;
+
+			case 2:
+				break;
+
+			default:
+				System.out.println("Error");
+			}
+		} else {
+			System.out.println("No te quedan Lanzamientos");
 		}
+	}
+
+	public int preguntarCambio() {
+		int index = 0;
+		do {
+			System.out.println("¿Quieres volver a tirar algún dado?");
+			System.out.println("1.- Sí 2.- No");
+			index = sc.nextInt();
+		} while (index < 1 || index > 2);
+
+		return index;
+
+	}
+
+	public void selecDadosACambiar() {
+		Dados d;
+		int index = 0;
+		boolean check = false;
+		do {
+			System.out.println("Selecciona qué dado deseas cambiar");
+			index = sc.nextInt();
+			// Asignamos qué dado es el que vamos a cambiar
+			d = dadosFinalesJugador.get(index);
+			dadosACambiar.add(d);
+
+		} while (!check);
+
 	}
 
 }
