@@ -5,6 +5,7 @@ import java.util.Random;
 public class Dados {
 
 	private int valorDado;
+	private boolean cambiado;
 
 	// CONSTRUCTOR COMPLETO
 	public Dados(int valorDado) {
@@ -14,6 +15,7 @@ public class Dados {
 	// Constructor vacío
 	public Dados() {
 		valorDado = 1;
+		cambiado = false;
 	}
 
 	// SETTERS & GETTERS
@@ -23,6 +25,14 @@ public class Dados {
 
 	public void setValorDado(int valorDado) {
 		this.valorDado = valorDado;
+	}
+	
+	public boolean getCambiado() {
+		return cambiado;
+	}
+
+	public void setCambiado(boolean cambiado) {
+		this.cambiado = cambiado;
 	}
 
 	// MÉTODOS VARIOS
