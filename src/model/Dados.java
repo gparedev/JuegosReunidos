@@ -5,6 +5,7 @@ import java.util.Random;
 public class Dados {
 
 	private int valorDado;
+	private int numeroDado;
 	private boolean cambiado;
 
 	// CONSTRUCTOR COMPLETO
@@ -33,6 +34,14 @@ public class Dados {
 
 	public void setCambiado(boolean cambiado) {
 		this.cambiado = cambiado;
+	}
+	
+	public int getNumeroDado() {
+		return numeroDado;
+	}
+
+	public void setNumeroDado(int numeroDado) {
+		this.numeroDado = numeroDado;
 	}
 
 	// MÉTODOS VARIOS

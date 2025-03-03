@@ -150,37 +150,6 @@ public class Jugador {
 
 	}
 
-	// Aquí hacer la logica en la que se pregunta que dados quiere cambiar.
-	public void cambioDados() {
-		if (numLanzamientos > 0) {
-			int index = 0;
-			switch (index) {
-			case 1:
-				break;
-
-			case 2:
-				break;
-
-			default:
-				System.out.println("Error");
-			}
-		} else {
-			System.out.println("No te quedan Lanzamientos");
-		}
-	}
-
-	public int preguntarCambio() {
-		int index = 0;
-		do {
-			System.out.println("¿Quieres volver a tirar algún dado?");
-			System.out.println("1.- Sí 2.- No");
-			index = sc.nextInt();
-		} while (index < 1 || index > 2);
-
-		return index;
-
-	}
-
 	public void selecDadosACambiar() {
 		int index = 0;
 		boolean check = false;
@@ -198,14 +167,15 @@ public class Jugador {
 				System.out.println("Sales de la opción cambiar dados");
 				check = true;
 			} else {
+				// Referencia al objeto de la lista
+				Dados d = dadosFinalesJugador.get(index - 1);
 
 				// Si el dado seleccionado no ha sido metido al grupo de cambiar...
-				if (!dadosFinalesJugador.get(index - 1).getCambiado()) {
+				if (!d.getCambiado()) {
 					System.out.println("Añades el dado " + index + " para cambiar, esta acción no se puede deshacer");
 
-					dadosFinalesJugador.get(index - 1).setCambiado(true);
-					dadosATirarJugador.add(dadosFinalesJugador.get(index - 1));
-					printDadosATirar();
+					d.setCambiado(true);
+					dadosATirarJugador.add(d);
 				} else {
 					System.out.println("Este dado ya ha sido seleccionado para cambiar.");
 				}
