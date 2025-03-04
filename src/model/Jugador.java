@@ -133,7 +133,9 @@ public class Jugador {
 				break;
 
 			case 4:
-				setDadosATirarJugador(new ArrayList<Dados>(dadosFinalesJugador));
+				dadosATirarJugador.clear();
+				dadosFinalesJugador.clear();
+				crearDados();
 				tirarDados();
 				break;
 
@@ -164,6 +166,11 @@ public class Jugador {
 
 			if (index == 6) {
 				System.out.println("Sales de la opción cambiar dados");
+
+				// Borro aquellos dados que tengan el atributo cambiado a True
+				// Dados::getCambiado es una referencia al meotdo getCambiado de la clase Dados
+				dadosFinalesJugador.removeIf(Dados::getCambiado);
+
 				check = true;
 			} else {
 				// Referencia al objeto de la lista
@@ -175,7 +182,7 @@ public class Jugador {
 
 					d.setCambiado(true);
 					dadosATirarJugador.add(d);
-					dadosFinalesJugador.remove(d);
+
 				} else {
 					System.out.println("Este dado ya ha sido seleccionado para cambiar.");
 				}
@@ -191,7 +198,8 @@ public class Jugador {
 		// Ordena los dados de menor a mayor en función de su atributo número.
 		// d -> d.getNumeroDado()) esta parte del código se llama expresión lambda, se
 		// encarga de tomar un objeto referenciado como d y accedemos al atributo número
-		// del dado. Ira iterando por cada objeto y a partir de esta condición lo ordena.
+		// del dado. Ira iterando por cada objeto y a partir de esta condición lo
+		// ordena.
 		dadosFinalesJugador.sort(Comparator.comparingInt(d -> d.getNumeroDado()));
 
 		for (Dados d : dadosFinalesJugador) {
