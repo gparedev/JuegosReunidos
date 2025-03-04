@@ -185,7 +185,11 @@ public class Jugador {
 			}
 
 		}
-
+	}
+	
+	public void jugar () {
+		tirarDados();
+		opcionesJugador();
 	}
 
 	// MÉTODOS DE IMPRESIÓN

@@ -11,8 +11,7 @@ public class Main {
 //		dado1.tirarDado();
 
 		Jugador jugador1 = new Jugador("Paco");
-		jugador1.tirarDados();
-		jugador1.opcionesJugador();
+		jugador1.jugar();
 	}
 
 }
