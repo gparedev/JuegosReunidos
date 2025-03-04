@@ -8,12 +8,8 @@ public class GameManager {
 	private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 	private static ArrayList<Jugador> ordenDeJuego = new ArrayList<Jugador>();
 
-	public static void bienvenida() {
-		System.out.println("Bienvnido a Yahtzee\n");
-		mostrarMenu();
-	}
-
 	public static void mostrarMenu() {
+		System.out.println("Bienvnido a Yahtzee\n");
 		// menu de inicio
 		Scanner sc = new Scanner(System.in);
 		int numeroMenu = 0;
@@ -23,7 +19,7 @@ public class GameManager {
 		} while (numeroMenu > 3 || numeroMenu < 1);
 		switch (numeroMenu) {
 		case 1:
-			crearJugadores(jugadores);
+			juego();
 			System.out.println("¡Empieza el juego!");
 			break;
 		case 2:
@@ -32,6 +28,7 @@ public class GameManager {
 			mostrarMenu();
 			break;
 		case 3:
+			System.out.println("Otra vez será");
 			terminarJuego();
 			break;
 
@@ -65,7 +62,7 @@ public class GameManager {
 		// número al azar que define la posición de el array jugadores que empezará
 		int empiezaJugadorNum = (int) (Math.random() * jugadores.size()); // número aleatorio de 0 a 4
 		System.out.println("Empezará el jugador número " + (empiezaJugadorNum + 1));
-		System.out.println("El orden será:");
+		System.out.println("El orden de juego será:");
 		if (empiezaJugadorNum == 0) {
 			// añade jugadores de la forma normal pero para el juego usaremos el arraylist
 			for (int i = 0; i < jugadores.size(); i++) {
@@ -126,4 +123,21 @@ public class GameManager {
 		return terminar;
 	}
 
+	public static void juego() {
+		int turno = 0; // jugador que juega
+		boolean jugada = true;
+		crearJugadores(jugadores);
+		while (terminarJuego() == true) {// juego
+			while (turno < ordenDeJuego.size()) {
+				jugada = true;
+				while (jugada) {
+					ordenDeJuego.get(turno).jugar();
+					jugada = false;
+				}
+				turno++;
+			}
+			turno = 0;
+		}
+
+	}
 }
