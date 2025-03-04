@@ -8,15 +8,6 @@ public class GameManager {
 	private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 	private static ArrayList<Jugador> ordenDeJuego = new ArrayList<Jugador>();
 
-
-	public GameManager(ArrayList<Jugador> jugadores) {
-		this.jugadores = new ArrayList<>();
-	}
-
-	public GameManager() {
-
-	}
-
 	public static void bienvenida() {
 		System.out.println("Bienvnido a Yahtzee\n");
 		mostrarMenu();
