@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Jugador {
@@ -65,27 +66,25 @@ public class Jugador {
 	private void crearDados() {
 		for (int i = 0; i < NUMERO_DADOS_JUGADOR; i++) {
 			dadosATirarJugador.add(new Dados());
+			dadosATirarJugador.get(i).setNumeroDado(i + 1);
 		}
 	}
 
 	public void tirarDados() {
 
-		int contador = 1;
-
 		if (numLanzamientos > 0) {
 
 			for (Dados d : dadosATirarJugador) {
-				System.out.print(contador + ".- ");
+				System.out.print(d.getNumeroDado() + ".- ");
 				// Cada vez que tiro los dados su estado de cambiado pasa a falso.
 				d.setCambiado(false);
 				d.tirarDado();
-				contador++;
+				dadosFinalesJugador.add(d);
 			}
 			// Una vez hemos tirado los dados los asignamos a la fase "Final"
 			// Aunque poner dadosATirarjugador parece lo mas evidente si no ponemos el new
 			// ArrayList... las dos listan apuntarian al mismo lugar haciendo que una sea
 			// igual a la otra para evitar esto debemos de crear un nuevo ArrayList
-			setDadosFinalesJugador(new ArrayList<Dados>(dadosATirarJugador));
 
 			// Una vez asignados los dados "Finales" Limpiamos la lista de dados a tirar por
 			// si el jugador quiere volver a tirar algunos dados
@@ -100,7 +99,7 @@ public class Jugador {
 
 	public void opcionesJugador() {
 		boolean check = false;
-		
+
 		while (!check) {
 			int index = 0;
 			System.out.println("Te quedan: " + numLanzamientos + " lanzamientos.");
@@ -176,6 +175,7 @@ public class Jugador {
 
 					d.setCambiado(true);
 					dadosATirarJugador.add(d);
+					dadosFinalesJugador.remove(d);
 				} else {
 					System.out.println("Este dado ya ha sido seleccionado para cambiar.");
 				}
@@ -188,18 +188,15 @@ public class Jugador {
 	// MÉTODOS DE IMPRESIÓN
 
 	public void printDadosFinales() {
-		int contador = 1;
-		for (Dados d : dadosFinalesJugador) {
-			System.out.println("Dado " + contador + ".- " + d.getValorDado());
-			contador++;
-		}
-	}
+		// Ordena los dados de menor a mayor en función de su atributo número.
+		// d -> d.getNumeroDado()) esta parte del código se llama expresión lambda, se
+		// encarga de tomar un objeto referenciado como d y accedemos al atributo número
+		// del dado. Ira iterando por cada objeto y a partir de esta condición lo ordena.
+		dadosFinalesJugador.sort(Comparator.comparingInt(d -> d.getNumeroDado()));
 
-	public void printDadosATirar() {
-		int contador = 1;
-		for (Dados d : dadosATirarJugador) {
-			System.out.println("Dado " + contador + ".- " + d.getValorDado());
-			contador++;
+		for (Dados d : dadosFinalesJugador) {
+
+			System.out.println("Dado " + d.getNumeroDado() + ".- " + d.getValorDado());
 		}
 	}
 
