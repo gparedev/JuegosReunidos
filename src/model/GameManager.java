@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class GameManager {
 
 	private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-	private int numeroDeJugadores;
+	private static ArrayList<Jugador> ordenDeJuego = new ArrayList<Jugador>();
 
-	public GameManager(ArrayList<Jugador> jugadores, int numeroDeJugadores) {
+
+	public GameManager(ArrayList<Jugador> jugadores) {
 		this.jugadores = new ArrayList<>();
-		this.numeroDeJugadores = numeroDeJugadores;
 	}
 
 	public GameManager() {
@@ -23,6 +23,7 @@ public class GameManager {
 	}
 
 	public static void mostrarMenu() {
+		// menu de inicio
 		Scanner sc = new Scanner(System.in);
 		int numeroMenu = 0;
 		do {
@@ -59,13 +60,42 @@ public class GameManager {
 		} while (numeroDeJugadores > 5 || numeroDeJugadores < 2);
 		System.out.println("Jugaréis " + numeroDeJugadores + " jugadores.");
 		for (int i = 0; i < numeroDeJugadores; i++) {
-			System.out.println("Introduce el nombre del jugador " + (i+1) + "/" + numeroDeJugadores + ":");
+			System.out.println("Introduce el nombre del jugador " + (i + 1) + "/" + numeroDeJugadores + ":");
 			jugadores.add(new Jugador(sc.nextLine()));
 		}
 		System.out.println("Los jugadores serán:");
 		for (int i = 0; i < jugadores.size(); i++) {
-			System.out.println("#" + (i+1) + " " + jugadores.get(i).getNombre());
+			System.out.println("#" + (i + 1) + " " + jugadores.get(i).getNombre());
 		}
+		empiezaJugador(ordenDeJuego);
+	}
+
+	public static void empiezaJugador(ArrayList<Jugador> ordenDeJuego) {
+		// número al azar que define la posición de el array jugadores que empezará
+		int empiezaJugadorNum = (int) (Math.random() * jugadores.size()); // número aleatorio de 0 a 4
+		System.out.println("Empezará el jugador número " + (empiezaJugadorNum + 1));
+		System.out.println("El orden será:");
+		if (empiezaJugadorNum == 0) {
+			// añade jugadores de la forma normal pero para el juego usaremos el arraylist
+			for (int i = 0; i < jugadores.size(); i++) {
+				ordenDeJuego.add(jugadores.get(i));
+			}
+			// empieza a añadir desde la posición(numero aleatorio) del array
+		} else if (empiezaJugadorNum == 1 || empiezaJugadorNum == 2 || empiezaJugadorNum == 3
+				|| empiezaJugadorNum == 4) {
+			for (int i = empiezaJugadorNum; i < jugadores.size(); i++) {
+				ordenDeJuego.add(jugadores.get(i));
+			}
+			// añade desde 0 hasta el jugador que empieza para añadirlo en el nuevo orden
+			for (int i = 0; i < empiezaJugadorNum; i++) {
+				ordenDeJuego.add(jugadores.get(i));
+			}
+		}
+		// imprimir nuevo orden de juego
+		for (int i = 0; i < ordenDeJuego.size(); i++) {
+			System.out.println("#" + (i + 1) + " " + ordenDeJuego.get(i).getNombre());
+		}
+
 	}
 
 	public void mostrarJugadores() {
