@@ -81,12 +81,8 @@ public class Jugador {
 				d.tirarDado();
 				dadosFinalesJugador.add(d);
 			}
-			// Una vez hemos tirado los dados los asignamos a la fase "Final"
-			// Aunque poner dadosATirarjugador parece lo mas evidente si no ponemos el new
-			// ArrayList... las dos listan apuntarian al mismo lugar haciendo que una sea
-			// igual a la otra para evitar esto debemos de crear un nuevo ArrayList
 
-			// Una vez asignados los dados "Finales" Limpiamos la lista de dados a tirar por
+			// Una vez añadidos los dados "Finales" Limpiamos la lista de dados a tirar por
 			// si el jugador quiere volver a tirar algunos dados
 			dadosATirarJugador.clear();
 
