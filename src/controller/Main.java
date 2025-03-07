@@ -5,11 +5,12 @@ import model.*;
 public class Main {
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		
-		GameManager gameManager = new GameManager();
+		Jugador jugador1 = new Jugador("Paco");
 		
-		gameManager.mostrarMenu();
-
+		jugador1.jugar();
+		
 	}
 
 }

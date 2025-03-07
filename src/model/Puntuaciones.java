@@ -1,11 +1,20 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class Puntuaciones {
+	// Atributo para almacenar la puntuación
+	private static ArrayList<Integer> puntuacion = new ArrayList<Integer>(Collections.nCopies(13, null));
+	private static ArrayList<Integer> usado = new ArrayList<Integer>(Collections.nCopies(13, null));
+	private static ArrayList<Dados> dadosFinalesJugador = new ArrayList<Dados>();
+
 	// Método que recibe el arrayList de los dados de una tirada
-	public static void numerosDados(ArrayList<Dados> dados) {
+	public static ArrayList<Integer> puntuacion(ArrayList<Dados> dados) {
+		// Array para almacenar la puntuación
+		ArrayList<Integer> puntuacion;
 		// Valores para almacenar cuantos valores de cada numero hay
 		int unos = 0;
 		int doses = 0;
@@ -41,11 +50,12 @@ public class Puntuaciones {
 		}
 		// Llama a la función combinaciones enviando la cantidad de cada numero que hay
 		// en la tirada
-		combinaciones(unos, doses, treses, cuatros, cincos, seises);
+		puntuacion = combinaciones(unos, doses, treses, cuatros, cincos, seises);
+		return puntuacion;
 	}
 
 	// Función que analiza las combinaciones existentes
-	static void combinaciones(int unos, int doses, int treses, int cuatros, int cincos, int seises) {
+	static ArrayList<Integer> combinaciones(int unos, int doses, int treses, int cuatros, int cincos, int seises) {
 		// Variables que determinan la puntuación que tiene cada casilla
 		int trio = 0;
 		int cuatroIguales = 0;
@@ -78,11 +88,12 @@ public class Puntuaciones {
 		int cuatro = calculoSimple(cuatros, 4);
 		int cinco = calculoSimple(cincos, 5);
 		int seis = calculoSimple(seises, 6);
-		// Se llama a la función calcChance para calcular el chance, que es la suma de todos los numeros de los dados
+		// Se llama a la función calcChance para calcular el chance, que es la suma de
+		// todos los numeros de los dados
 		chance = calcChance(uno, dos, tres, cuatro, cinco, seis);
 		// for que valora combinaciones simples
 		for (int i = 0; i < Array.length; i++) {
-			if (Array [i] >= 1) {
+			if (Array[i] >= 1) {
 				// switch que anota que número existen en los dados para usar en las escaleras
 				switch (ArrayNumero[i]) {
 				case 1:
@@ -128,7 +139,9 @@ public class Puntuaciones {
 		escaleraPeque = calcEscaleraPeque(boolUno, boolDos, boolTres, boolCuatro, boolCinco, boolSeis);
 		escaleraGrande = calcEscaleraGrande(boolUno, boolDos, boolTres, boolCuatro, boolCinco, boolSeis);
 		// Se almacenan las puntuaciones en otra función
-		imprimirPuntuacion(uno, dos, tres, cuatro, cinco, seis, trio, cuatroIguales, fullHouse, escaleraPeque, escaleraGrande, chance, yahtzee);
+		ArrayList<Integer> puntuaciones = new ArrayList<>(Arrays.asList(uno, dos, tres, cuatro, cinco, seis, trio,
+				cuatroIguales, fullHouse, escaleraPeque, escaleraGrande, chance, yahtzee));
+		return puntuaciones;
 	}
 
 	// Función que realiza cálculos simples
@@ -137,6 +150,7 @@ public class Puntuaciones {
 		num = cantidad * numero;
 		return num;
 	}
+
 	// Función que suma todos los valores
 	static int calcChance(int uno, int dos, int tres, int cuatro, int cinco, int seis) {
 		int chance = (uno + dos + tres + cuatro + cinco + seis);
@@ -155,7 +169,7 @@ public class Puntuaciones {
 		int fullHouse = 25;
 		return fullHouse;
 	}
-	
+
 	// Función que calcula la escalera pequeña
 	static int calcEscaleraPeque(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco, boolean seis) {
 		int resultado = 0;
@@ -172,7 +186,7 @@ public class Puntuaciones {
 		}
 		return resultado;
 	}
-	
+
 	// Función que calcula la escalera grande
 	static int calcEscaleraGrande(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco, boolean seis) {
 		int resultado = 0;
@@ -189,10 +203,65 @@ public class Puntuaciones {
 	}
 
 	// Imprimir la puntuación
-	static void imprimirPuntuacion(int uno, int dos, int tres, int cuatro, int cinco, int seis, int trio,
-			int cuatroIguales, int fullHouse, int escaleraPeque, int escaleraGrande, int chance, int yahtzee) {
-		System.out.println("Uno: " + uno + " Dos: " + dos + " Tres:" + tres + " cuatro: " + cuatro + " cinco: " + cinco
-				+ " seis: " + seis + " trio: " + trio + " Cuatro Iguales: " + cuatroIguales + " FullHouse: " + fullHouse
-				+ " Escalera Pequeña: " + escaleraPeque + " Escalera Grande: " + escaleraGrande + " Chance: " + chance + " Yahtzee: " + yahtzee);
+	static void imprimirPuntuacion() {
+		ArrayList<Integer> puntuaciones = getPuntuacionRel();
+		String[] valores = { "-Uno: ", " -Dos: ", " -Tres: ", " -Cuatro: ", " -Cinco: ", " -Seis: ", " -Trio: ",
+				" -Cuatro Iguales: ", " -FullHouse: ", " -Escalera Pequeña: ", " -Escalera Grande: ", " -Chance: ",
+				" -Yahtzee: " };
+		// For para imprimir los valores y controlar la impresión
+		for (int i = 0; i < puntuaciones.size(); i++) {
+			if (puntuaciones.get(i) == 0) {
+				System.out.print(valores[i] + " ");
+			} else {
+				System.out.print(valores[i] + puntuaciones.get(i));
+			}
+			if (usado.get(i) != null) {
+				System.out.print("*");
+			}
+		}
+
 	}
+
+	public static ArrayList<Dados> getDadosFinalesJugador() {
+		return dadosFinalesJugador;
+	}
+
+	public static void setDadosFinalesJugador(ArrayList<Dados> dadosFinalesJugadorDar) {
+		dadosFinalesJugador = dadosFinalesJugadorDar;
+	}
+
+	// Es la función a la que se tiene que llamar para imprimir la puntuación en la
+	// partida
+	public static ArrayList<Integer> getPuntuacionRel() {
+		ArrayList<Dados> dados = getDadosFinalesJugador();
+		// Llamada a putuación para que devuelva la puntuación y posteriormente
+		// imprimirla llamando a imprimirPuntuación
+		ArrayList<Integer> puntuacion = puntuacion(dados);
+		return puntuacion;
+	}
+
+	public static void setPuntuacion() {
+		boolean respuestaValida = false;
+		int puntuar = 1;
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Integer> puntuaciones = getPuntuacionRel();
+		do {
+			if (puntuar <= 0 || puntuar > 12) {
+				System.out.println("Escoge un valor válido");
+			}
+			System.out.println(
+					"Escoge un valor para puntuar:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
+							+ "| 7.- Trio | 8.- Cuatro Iguales\n9.- FullHouse | 10.- Escalera Pequeña | 11.- Escalera Grande "
+							+ "| 12.- Chance | 13.- Yahtzee");
+			puntuar = sc.nextInt();
+			if (usado.get(puntuar-1) == null) {
+				usado.set(puntuar-1, 1);
+				respuestaValida = true;
+			}
+		} while (puntuar <= 0 || puntuar > 12 && !respuestaValida);
+		puntuacion.add(puntuar-1, puntuaciones.get(puntuar-1));
+		System.out.println("Has puntuado " + puntuaciones.get(puntuar-1));
+
+	}
+
 }
