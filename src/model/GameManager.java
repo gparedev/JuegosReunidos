@@ -94,7 +94,7 @@ public class GameManager {
 
 	public static void pulsarEnter() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Pulsa ENTER para continuar");
+		System.out.println("\nPulsa ENTER para continuar");
 		sc.nextLine();
 	}
 
@@ -124,20 +124,33 @@ public class GameManager {
 	}
 
 	public static void juego() {
-		int turno = 0; // jugador que juega
-		boolean jugada = true;
+		boolean estadoJuego = terminarJuego();
+		int jugadorNum = 0; // jugador que juega
+		boolean jugada = true; // jugada nº x del jugador
 		crearJugadores(jugadores);
-		while (terminarJuego() == true) {// juego
-			while (turno < ordenDeJuego.size()) {
+		while (estadoJuego == true) {// juego
+			while (jugadorNum < ordenDeJuego.size()) {
 				jugada = true;
 				while (jugada) {
-					ordenDeJuego.get(turno).jugar();
+					ordenDeJuego.get(jugadorNum).jugar();
 					jugada = false;
 				}
-				turno++;
+				jugadorNum++;
 			}
-			turno = 0;
+			jugadorNum = 0;
+			estadoJuego = false;
 		}
+		if (!estadoJuego) { // cuando acaba una partida, para empezar un juego nuevo con nuevos jugadores
+			jugadores.clear();
+			ordenDeJuego.clear();
+			System.out.println("EL JUEGO HA TERMINADO");
+		}
+		mostrarMenu();
 
 	}
+	// clasificaión
+	public static void mostrarClasificacion() {
+		
+	}
+	
 }
