@@ -12,6 +12,7 @@ public class Jugador {
 	private ArrayList<Dados> dadosATirarJugador = new ArrayList<Dados>();
 	private final int NUMERO_DADOS_JUGADOR = 5;
 	private final int MAXIMO_NUMERO_LANZAMIENTOS = 3;
+	private Puntuaciones misPuntuaciones = new Puntuaciones();
 
 	private Scanner sc = new Scanner(System.in);
 
@@ -88,6 +89,8 @@ public class Jugador {
 			dadosATirarJugador.clear();
 
 			numLanzamientos--;
+			Puntuaciones.setDadosFinalesJugador(dadosFinalesJugador);
+			Puntuaciones.imprimirPuntuacion();
 		} else {
 			System.out.println("No te quedan lanzamientos, campeón");
 		}
@@ -114,6 +117,8 @@ public class Jugador {
 				System.out.println("Has confirmado los siguientes dados: ");
 				numLanzamientos = MAXIMO_NUMERO_LANZAMIENTOS;
 				printDadosFinales();
+				Puntuaciones.setDadosFinalesJugador(dadosFinalesJugador);
+				Puntuaciones.setPuntuacion();
 				check = true;
 				break;
 
