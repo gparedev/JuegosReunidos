@@ -124,12 +124,7 @@ public class Jugador {
 				break;
 
 			case 2:
-				if (numLanzamientos > 0) {
-					selecDadosACambiar();
-				} else {
-					System.out.println("No te quedan lanzamientos, Crack");
-				}
-
+				selecDadosACambiar();
 				break;
 
 			case 3:
@@ -142,14 +137,10 @@ public class Jugador {
 				break;
 
 			case 4:
-				if (numLanzamientos > 0) {
-					dadosATirarJugador.clear();
-					dadosFinalesJugador.clear();
-					crearDados();
-					tirarDados();
-				} else {
-					System.out.println("No te quedan lanzamientos, Crack");
-				}
+				dadosATirarJugador.clear();
+				dadosFinalesJugador.clear();
+				crearDados();
+				tirarDados();
 				break;
 
 			case 5:
