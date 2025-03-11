@@ -10,6 +10,7 @@ public class Puntuaciones {
 	private ArrayList<Integer> puntuacion = new ArrayList<>(Collections.nCopies(13, 0));
 	private ArrayList<Integer> usado = new ArrayList<>(Collections.nCopies(13, 0));
 	
+	private int puntuacionFinal;
    
 	private ArrayList<Dados> dadosFinalesJugador = new ArrayList<Dados>();
 	
@@ -268,15 +269,10 @@ public class Puntuaciones {
 	}
 	
 	public int getSumaPuntuacionFinal() {
-		int puntuacionFinal = 0;
 		for (int num : puntuacion) {
 			puntuacionFinal = puntuacionFinal + num;
 		}
 		return puntuacionFinal;
-	}
-	
-	public void imprimirPuntuacionFinal() {
-		System.out.println(getSumaPuntuacionFinal());
 	}
 
 }

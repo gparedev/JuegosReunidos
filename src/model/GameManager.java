@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class GameManager {
 
@@ -124,10 +125,14 @@ public class GameManager {
 	}
 
 	public static void juego() {
+		Scanner sc = new Scanner(System.in);
 		
 		boolean estadoJuego = terminarJuego(); // permite acabar el juego
 		int turno = 0; // jugador que juega (turno)
 		boolean jugada = true; // jugada nº x del jugador
+		int turnoGlobal = 0;
+		
+		int jugarOtraPartida;
 		
 		crearJugadores(jugadores);
 		while (estadoJuego == true) {// juego
@@ -140,18 +145,46 @@ public class GameManager {
 				turno++;
 			}
 			turno = 0; // vuelve al turno del primer jugador
-			estadoJuego = false; // con esto solo hay una ronda
+			//estadoJuego = false; // con esto solo hay una ronda
+			turnoGlobal++;
+			if (turnoGlobal == 1) {
+				estadoJuego = false;
+			}
 		}
 		if (!estadoJuego) { // cuando acaba una partida, para empezar un juego nuevo con nuevos jugadores
+			mostrarClasificacionOrdenada();
 			jugadores.clear();
 			ordenDeJuego.clear();
 			System.out.println("EL JUEGO HA TERMINADO");
 		}
-		mostrarMenu(); // reinicio del juego
+		do {
+			System.out.println("\n\n¿Deseas jugar otra partida? \n1.- Si | 2.- No");
+			jugarOtraPartida = sc.nextInt();
+		} while(jugarOtraPartida > 2 || jugarOtraPartida < 1);
+		
+		if (jugarOtraPartida == 1) {
+			mostrarMenu(); // reinicio del juego
+		} else {
+			System.out.println("Otra vez será");
+		}
 
 	}
 	// clasificación
-	public static void mostrarClasificacion() { // GUSTAVO
+	public static void mostrarClasificacionOrdenada() {
+		for (int i = 0; i < ordenDeJuego.size(); i++) {
+			System.out.println("El jugador "+ ordenDeJuego.get(i).getNombre() + " ha puntuado: " + ordenDeJuego.get(i).puntuacionesJugador.getSumaPuntuacionFinal() + " puntos.");
+		}
+		
+		System.out.println("Clasificación final:");
+		//ordenDeJuego.sort(Comparator.comparingInt(jugador -> jugador.puntuacionesJugador.getSumaPuntuacionFinal()));
+		ordenDeJuego.sort(Comparator.comparing(jugador -> jugador.puntuacionesJugador.getSumaPuntuacionFinal(), Comparator.reverseOrder()));
+
+
+		int posicion = 1;
+		for (Jugador jugador : ordenDeJuego) {
+			System.out.println(posicion + "ª posición " + jugador.getNombre());
+			posicion++;
+		}
 		
 	}
 	
