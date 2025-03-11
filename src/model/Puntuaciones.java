@@ -7,14 +7,16 @@ import java.util.Scanner;
 
 public class Puntuaciones {
 	// Atributo para almacenar la puntuación
-	private static ArrayList<Integer> puntuacion = new ArrayList<Integer>(Collections.nCopies(13, null));
-	private static ArrayList<Integer> usado = new ArrayList<Integer>(Collections.nCopies(13, null));
-	private static ArrayList<Dados> dadosFinalesJugador = new ArrayList<Dados>();
-
+	private ArrayList<Integer> puntuacion = new ArrayList<>(Collections.nCopies(13, 0));
+	private ArrayList<Integer> usado = new ArrayList<>(Collections.nCopies(13, 0));
+	
+   
+	private ArrayList<Dados> dadosFinalesJugador = new ArrayList<Dados>();
+	
 	// Método que recibe el arrayList de los dados de una tirada
-	public static ArrayList<Integer> puntuacion(ArrayList<Dados> dados) {
+	public ArrayList<Integer> puntuacion(ArrayList<Dados> dados) {
 		// Array para almacenar la puntuación
-		ArrayList<Integer> puntuacion;
+		ArrayList<Integer> puntuacionRel;
 		// Valores para almacenar cuantos valores de cada numero hay
 		int unos = 0;
 		int doses = 0;
@@ -50,12 +52,12 @@ public class Puntuaciones {
 		}
 		// Llama a la función combinaciones enviando la cantidad de cada numero que hay
 		// en la tirada
-		puntuacion = combinaciones(unos, doses, treses, cuatros, cincos, seises);
-		return puntuacion;
+		puntuacionRel = combinaciones(unos, doses, treses, cuatros, cincos, seises);
+		return puntuacionRel;
 	}
 
 	// Función que analiza las combinaciones existentes
-	static ArrayList<Integer> combinaciones(int unos, int doses, int treses, int cuatros, int cincos, int seises) {
+	private ArrayList<Integer> combinaciones(int unos, int doses, int treses, int cuatros, int cincos, int seises) {
 		// Variables que determinan la puntuación que tiene cada casilla
 		int trio = 0;
 		int cuatroIguales = 0;
@@ -145,33 +147,33 @@ public class Puntuaciones {
 	}
 
 	// Función que realiza cálculos simples
-	static int calculoSimple(int cantidad, int numero) {
+	private int calculoSimple(int cantidad, int numero) {
 		int num = 0;
 		num = cantidad * numero;
 		return num;
 	}
 
 	// Función que suma todos los valores
-	static int calcChance(int uno, int dos, int tres, int cuatro, int cinco, int seis) {
+	private int calcChance(int uno, int dos, int tres, int cuatro, int cinco, int seis) {
 		int chance = (uno + dos + tres + cuatro + cinco + seis);
 		return chance;
 	}
 
 	// Función que calcula el valor de Yahtzee
-	static int calcYahtzee(int numero) {
+	private int calcYahtzee(int numero) {
 		int yahtzee = 0;
 		yahtzee = 50;
 		return yahtzee;
 	}
 
 	// Función que calcula el fullHouse
-	static int calcFullHouse(int par, int trio) {
+	private int calcFullHouse(int par, int trio) {
 		int fullHouse = 25;
 		return fullHouse;
 	}
 
 	// Función que calcula la escalera pequeña
-	static int calcEscaleraPeque(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco, boolean seis) {
+	private int calcEscaleraPeque(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco, boolean seis) {
 		int resultado = 0;
 		boolean escalera = false;
 		if (uno && dos && tres && cuatro) {
@@ -188,7 +190,7 @@ public class Puntuaciones {
 	}
 
 	// Función que calcula la escalera grande
-	static int calcEscaleraGrande(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco, boolean seis) {
+	private int calcEscaleraGrande(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco, boolean seis) {
 		int resultado = 0;
 		boolean escalera = false;
 		if (uno && dos && tres && cuatro && cinco) {
@@ -203,7 +205,7 @@ public class Puntuaciones {
 	}
 
 	// Imprimir la puntuación
-	static void imprimirPuntuacion() {
+	public void imprimirPuntuacion() {
 		ArrayList<Integer> puntuaciones = getPuntuacionRel();
 		String[] valores = { "-Uno: ", " -Dos: ", " -Tres: ", " -Cuatro: ", " -Cinco: ", " -Seis: ", " -Trio: ",
 				" -Cuatro Iguales: ", " -FullHouse: ", " -Escalera Pequeña: ", " -Escalera Grande: ", " -Chance: ",
@@ -215,24 +217,24 @@ public class Puntuaciones {
 			} else {
 				System.out.print(valores[i] + puntuaciones.get(i));
 			}
-			if (usado.get(i) != null) {
+			if (usado.get(i) != 0) {
 				System.out.print("*");
 			}
 		}
 
 	}
 
-	public static ArrayList<Dados> getDadosFinalesJugador() {
+	public ArrayList<Dados> getDadosFinalesJugador() {
 		return dadosFinalesJugador;
 	}
 
-	public static void setDadosFinalesJugador(ArrayList<Dados> dadosFinalesJugadorDar) {
+	public void setDadosFinalesJugador(ArrayList<Dados> dadosFinalesJugadorDar) {
 		dadosFinalesJugador = dadosFinalesJugadorDar;
 	}
 
 	// Es la función a la que se tiene que llamar para imprimir la puntuación en la
 	// partida
-	public static ArrayList<Integer> getPuntuacionRel() {
+	public ArrayList<Integer> getPuntuacionRel() {
 		ArrayList<Dados> dados = getDadosFinalesJugador();
 		// Llamada a putuación para que devuelva la puntuación y posteriormente
 		// imprimirla llamando a imprimirPuntuación
@@ -240,12 +242,13 @@ public class Puntuaciones {
 		return puntuacion;
 	}
 
-	public static void setPuntuacion() {
+	public void setPuntuacion() {
 		boolean respuestaValida = false;
 		int puntuar = 1;
 		Scanner sc = new Scanner(System.in);
 		ArrayList<Integer> puntuaciones = getPuntuacionRel();
 		do {
+			respuestaValida = false;
 			if (puntuar <= 0 || puntuar > 12) {
 				System.out.println("Escoge un valor válido");
 			}
@@ -254,14 +257,26 @@ public class Puntuaciones {
 							+ "| 7.- Trio | 8.- Cuatro Iguales\n9.- FullHouse | 10.- Escalera Pequeña | 11.- Escalera Grande "
 							+ "| 12.- Chance | 13.- Yahtzee");
 			puntuar = sc.nextInt();
-			if (usado.get(puntuar-1) == null) {
+			if (usado.get(puntuar-1) == 0) {
 				usado.set(puntuar-1, 1);
 				respuestaValida = true;
 			}
-		} while (puntuar <= 0 || puntuar > 12 && !respuestaValida);
-		puntuacion.add(puntuar-1, puntuaciones.get(puntuar-1));
+		} while (!respuestaValida);
+		puntuacion.set(puntuar-1, puntuaciones.get(puntuar-1));
 		System.out.println("Has puntuado " + puntuaciones.get(puntuar-1));
 
+	}
+	
+	public int getSumaPuntuacionFinal() {
+		int puntuacionFinal = 0;
+		for (int num : puntuacion) {
+			puntuacionFinal = puntuacionFinal + num;
+		}
+		return puntuacionFinal;
+	}
+	
+	public void imprimirPuntuacionFinal() {
+		System.out.println(getSumaPuntuacionFinal());
 	}
 
 }
