@@ -124,32 +124,34 @@ public class GameManager {
 	}
 
 	public static void juego() {
-		boolean estadoJuego = terminarJuego();
-		int jugadorNum = 0; // jugador que juega
+		
+		boolean estadoJuego = terminarJuego(); // permite acabar el juego
+		int turno = 0; // jugador que juega (turno)
 		boolean jugada = true; // jugada nº x del jugador
+		
 		crearJugadores(jugadores);
 		while (estadoJuego == true) {// juego
-			while (jugadorNum < ordenDeJuego.size()) {
+			while (turno < ordenDeJuego.size()) {
 				jugada = true;
 				while (jugada) {
-					ordenDeJuego.get(jugadorNum).jugar();
+					ordenDeJuego.get(turno).jugar(); // en jugar están los 3 turnos
 					jugada = false;
 				}
-				jugadorNum++;
+				turno++;
 			}
-			jugadorNum = 0;
-			estadoJuego = false;
+			turno = 0; // vuelve al turno del primer jugador
+			estadoJuego = false; // con esto solo hay una ronda
 		}
 		if (!estadoJuego) { // cuando acaba una partida, para empezar un juego nuevo con nuevos jugadores
 			jugadores.clear();
 			ordenDeJuego.clear();
 			System.out.println("EL JUEGO HA TERMINADO");
 		}
-		mostrarMenu();
+		mostrarMenu(); // reinicio del juego
 
 	}
-	// clasificaión
-	public static void mostrarClasificacion() {
+	// clasificación
+	public static void mostrarClasificacion() { // GUSTAVO
 		
 	}
 	
