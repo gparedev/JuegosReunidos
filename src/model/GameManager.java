@@ -10,7 +10,7 @@ public class GameManager {
 	private static ArrayList<Jugador> ordenDeJuego = new ArrayList<Jugador>();
 
 	public static void mostrarMenu() {
-		System.out.println("Bienvnido a Yahtzee\n");
+		System.out.println("Bienvenido a Yahtzee\n");
 		// menu de inicio
 		Scanner sc = new Scanner(System.in);
 		int numeroMenu = 0;

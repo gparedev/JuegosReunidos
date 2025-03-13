@@ -106,8 +106,8 @@ public class Jugador {
 			System.out.println("Te quedan: " + numLanzamientos + " lanzamientos, " + nombre);
 			do {
 
-				System.out.println("1.- Confirmar 2.- Cambiar Dados 3.- Tirar Dados Seleccionados"
-						+ " 4.- Tirar todos los dados 5.- Mostrar Dados");
+				System.out.println("1.- Confirmar Dados | 2.- Cambiar Dados | 3.- Tirar Dados Seleccionados |"
+						+ " 4.- Tirar todos los dados | 5.- Mostrar Dados");
 				index = sc.nextInt();
 				sc.nextLine();
 
@@ -115,16 +115,28 @@ public class Jugador {
 
 			switch (index) {
 			case 1:
-				System.out.println("Has confirmado los siguientes dados: ");
-				numLanzamientos = MAXIMO_NUMERO_LANZAMIENTOS;
-				printDadosFinales();
-				puntuacionesJugador.setDadosFinalesJugador(dadosFinalesJugador);
-				puntuacionesJugador.setPuntuacion();
-				check = true;
+				if (dadosFinalesJugador.size() != NUMERO_DADOS_JUGADOR) {
+					System.out.println(
+							"No puedes confirmar, tira los dados seleccionados para cambiar antes de confirmar");
+					printDadosFinales();
+				} else {
+					System.out.println("Has confirmado los siguientes dados: ");
+					numLanzamientos = MAXIMO_NUMERO_LANZAMIENTOS;
+					printDadosFinales();
+					puntuacionesJugador.setDadosFinalesJugador(dadosFinalesJugador);
+					puntuacionesJugador.imprimirPuntuacion();
+					puntuacionesJugador.setPuntuacion();
+					check = true;
+				}
 				break;
 
 			case 2:
-				selecDadosACambiar();
+				if (numLanzamientos > 0) {
+					selecDadosACambiar();
+				} else {
+					System.out.println("Sin lanzamientos no puedes cambiar dados, crack.");
+				}
+
 				break;
 
 			case 3:
@@ -137,10 +149,15 @@ public class Jugador {
 				break;
 
 			case 4:
-				dadosATirarJugador.clear();
-				dadosFinalesJugador.clear();
-				crearDados();
-				tirarDados();
+				if (numLanzamientos > 0) {
+					dadosATirarJugador.clear();
+					dadosFinalesJugador.clear();
+					crearDados();
+					tirarDados();
+				} else {
+					System.out.println("No te quedan lanzamientos, crack.");
+				}
+
 				break;
 
 			case 5:
@@ -164,6 +181,7 @@ public class Jugador {
 			do {
 
 				System.out.println("Selecciona qué dado deseas cambiar o pulsa 6 para confirmar la selección");
+				printDadosCambiado();
 				index = sc.nextInt();
 
 			} while (index < 1 || index > 6);
@@ -202,6 +220,8 @@ public class Jugador {
 
 	// MÉTODOS DE IMPRESIÓN
 
+	// Imprime los dados finales (los que van a puntuar) además de comprobar si hay
+	// dados en la lista de tirar, si los hay tambien los imprime
 	public void printDadosFinales() {
 		// Ordena los dados de menor a mayor en función de su atributo número.
 		// d -> d.getNumeroDado()) esta parte del código se llama expresión lambda, se
@@ -209,10 +229,34 @@ public class Jugador {
 		// del dado. Ira iterando por cada objeto y a partir de esta condición lo
 		// ordena.
 		dadosFinalesJugador.sort(Comparator.comparingInt(d -> d.getNumeroDado()));
-
+		System.out.println("Dados a puntuar: ");
 		for (Dados d : dadosFinalesJugador) {
 
 			System.out.println("Dado " + d.getNumeroDado() + ".- " + d.getValorDado());
+		}
+
+		if (!dadosATirarJugador.isEmpty()) {
+			System.out.println("Dados a cambiar: ");
+
+			for (Dados d : dadosATirarJugador) {
+				System.out.println("Dado " + d.getNumeroDado() + ".- " + d.getValorDado());
+			}
+		}
+	}
+
+	// Esta función se usa en el menu de selecDadosACambiar para dar feedback al
+	// usuario de qué dados son cambiados
+	public void printDadosCambiado() {
+
+		dadosFinalesJugador.sort(Comparator.comparingInt(d -> d.getNumeroDado()));
+
+		for (Dados d : dadosFinalesJugador) {
+
+			if (!d.getCambiado()) {
+				System.out.println("Dado " + d.getNumeroDado() + ".- " + d.getValorDado());
+			} else {
+				System.out.println("Dado " + d.getNumeroDado() + ".- " + d.getValorDado() + " | CAMBIADO");
+			}
 		}
 	}
 
