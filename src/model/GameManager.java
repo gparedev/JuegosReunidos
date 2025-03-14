@@ -62,8 +62,7 @@ public class GameManager {
 	public static void empiezaJugador(ArrayList<Jugador> ordenDeJuego) {
 		// número al azar que define la posición de el array jugadores que empezará
 		int empiezaJugadorNum = (int) (Math.random() * jugadores.size()); // número aleatorio de 0 a 4
-		System.out.println("Empezará el jugador número " + (empiezaJugadorNum + 1));
-		System.out.println("El orden de juego será:");
+		System.out.println("\nEmpezará el jugador número " + (empiezaJugadorNum + 1) + " por lo tanto el orden del juego será:");
 		if (empiezaJugadorNum == 0) {
 			// añade jugadores de la forma normal pero para el juego usaremos el arraylist
 			for (int i = 0; i < jugadores.size(); i++) {

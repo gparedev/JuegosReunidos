@@ -208,9 +208,9 @@ public class Puntuaciones {
 	// Imprimir la puntuación
 	public void imprimirPuntuacion() {
 		ArrayList<Integer> puntuaciones = getPuntuacionRel();
-		String[] valores = { "-Uno: ", " -Dos: ", " -Tres: ", " -Cuatro: ", " -Cinco: ", " -Seis: ", " -Trio: ",
-				" -Cuatro Iguales: ", " -FullHouse: ", " -Escalera Pequeña: ", " -Escalera Grande: ", " -Chance: ",
-				" -Yahtzee: " };
+		String[] valores = { "-Uno: ", "  -Dos: ", "  -Tres: ", "  -Cuatro: ", "  -Cinco: ", "  -Seis: ", "\n-Trio: ",
+				"  -Cuatro Iguales: ", "  -FullHouse: ", "  -Escalera Pequeña: ", "  -Escalera Grande: ", "  -Chance: ",
+				"\n-Yahtzee: " };
 		// For para imprimir los valores y controlar la impresión
 		for (int i = 0; i < puntuaciones.size(); i++) {
 			if (puntuaciones.get(i) == 0) {
@@ -254,7 +254,7 @@ public class Puntuaciones {
 				System.out.println("Escoge un valor válido");
 			}
 			System.out.println(
-					"Escoge un valor para puntuar:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
+					"\nEscoge un valor para puntuar:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
 							+ "| 7.- Trio | 8.- Cuatro Iguales\n9.- FullHouse | 10.- Escalera Pequeña | 11.- Escalera Grande "
 							+ "| 12.- Chance | 13.- Yahtzee");
 			puntuar = sc.nextInt();
