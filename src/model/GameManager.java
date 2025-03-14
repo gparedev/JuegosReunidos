@@ -154,7 +154,7 @@ public class GameManager {
 			mostrarClasificacionOrdenada();
 			jugadores.clear();
 			ordenDeJuego.clear();
-			System.out.println("EL JUEGO HA TERMINADO");
+			System.out.println("\nEL JUEGO HA TERMINADO");
 		}
 		do {
 			System.out.println("\n\n¿Deseas jugar otra partida? \n1.- Si | 2.- No");
@@ -174,7 +174,7 @@ public class GameManager {
 			System.out.println("El jugador "+ ordenDeJuego.get(i).getNombre() + " ha puntuado: " + ordenDeJuego.get(i).puntuacionesJugador.getSumaPuntuacionFinal() + " puntos.");
 		}
 		
-		System.out.println("Clasificación final:");
+		System.out.println("\nClasificación final:");
 		//ordenDeJuego.sort(Comparator.comparingInt(jugador -> jugador.puntuacionesJugador.getSumaPuntuacionFinal()));
 		ordenDeJuego.sort(Comparator.comparing(jugador -> jugador.puntuacionesJugador.getSumaPuntuacionFinal(), Comparator.reverseOrder()));
 

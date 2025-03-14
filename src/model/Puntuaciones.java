@@ -253,11 +253,13 @@ public class Puntuaciones {
 			if (puntuar <= 0 || puntuar > 12) {
 				System.out.println("Escoge un valor válido");
 			}
-			System.out.println(
-					"\nEscoge un valor para puntuar:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
-							+ "| 7.- Trio | 8.- Cuatro Iguales\n9.- FullHouse | 10.- Escalera Pequeña | 11.- Escalera Grande "
-							+ "| 12.- Chance | 13.- Yahtzee");
-			puntuar = sc.nextInt();
+			do {
+				System.out.println(
+						"\nEscoge un valor para puntuar:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
+								+ "| 7.- Trio | 8.- Cuatro Iguales\n9.- FullHouse | 10.- Escalera Pequeña | 11.- Escalera Grande "
+								+ "| 12.- Chance | 13.- Yahtzee");
+				puntuar = sc.nextInt();
+			} while (puntuar > 13 || puntuar < 1);
 			if (usado.get(puntuar-1) == 0) {
 				usado.set(puntuar-1, 1);
 				respuestaValida = true;
