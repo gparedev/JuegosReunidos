@@ -75,7 +75,7 @@ public class Jugador {
 
 		if (numLanzamientos > 0) {
 
-			System.out.println("\n\nTurno de " + nombre + ":");
+			System.out.println("Tirando dados...");
 			for (Dados d : dadosATirarJugador) {
 				System.out.print(d.getNumeroDado() + ".- ");
 				// Cada vez que tiro los dados su estado de cambiado pasa a falso.
@@ -103,10 +103,9 @@ public class Jugador {
 
 		while (!check) {
 			int index = 0;
-			System.out.println("\nTe quedan: " + numLanzamientos + " lanzamientos, " + nombre);
 			do {
 
-				System.out.println("1.- Confirmar Dados | 2.- Cambiar Dados | 3.- Tirar Dados Seleccionados |"
+				System.out.println("\n1.- Confirmar Dados | 2.- Cambiar Dados | 3.- Tirar Dados Seleccionados |"
 						+ " 4.- Tirar todos los dados | 5.- Mostrar Dados");
 				index = sc.nextInt();
 				sc.nextLine();
@@ -258,6 +257,7 @@ public class Jugador {
 				System.out.println("Dado " + d.getNumeroDado() + ".- " + d.getValorDado() + " | CAMBIADO");
 			}
 		}
+		System.out.println("6.- CONFIRMAR");
 	}
 
 }

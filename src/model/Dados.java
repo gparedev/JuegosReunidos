@@ -27,7 +27,7 @@ public class Dados {
 	public void setValorDado(int valorDado) {
 		this.valorDado = valorDado;
 	}
-	
+
 	public boolean getCambiado() {
 		return cambiado;
 	}
@@ -35,7 +35,7 @@ public class Dados {
 	public void setCambiado(boolean cambiado) {
 		this.cambiado = cambiado;
 	}
-	
+
 	public int getNumeroDado() {
 		return numeroDado;
 	}
@@ -55,7 +55,60 @@ public class Dados {
 
 	public void tirarDado() {
 		valorDado = generateRandom(1, 6);
-		System.out.println("Tiras el dado y sacas un: " + valorDado);
+		switch (valorDado) {
+		case 1:
+			System.out.println("+-----+\r\n"
+					+ "    |     |\r\n"
+					+ "    |  *  |\r\n"
+					+ "    |     |\r\n"
+					+ "    +-----+\r\n"
+					+ "");
+			break;
+		case 2:
+			System.out.println("+-----+\r\n"
+					+ "    | *   |\r\n"
+					+ "    |     |\r\n"
+					+ "    |   * |\r\n"
+					+ "    +-----+\r\n"
+					+ "");
+			break;
+		case 3:
+			System.out.println("+-----+\r\n"
+					+ "    | *   |\r\n"
+					+ "    |  *  |\r\n"
+					+ "    |   * |\r\n"
+					+ "    +-----+\r\n"
+					+ "");
+			break;
+		case 4:
+			System.out.println("+-----+\r\n"
+					+ "    | * * |\r\n"
+					+ "    |     |\r\n"
+					+ "    | * * |\r\n"
+					+ "    +-----+\r\n"
+					+ "");
+
+			break;
+		case 5:
+			System.out.println("+-----+\r\n"
+					+ "    | * * |\r\n"
+					+ "    |  *  |\r\n"
+					+ "    | * * |\r\n"
+					+ "    +-----+\r\n"
+					+ "");
+			break;
+		case 6:
+			System.out.println("+-----+\r\n"
+					+ "    | * * |\r\n"
+					+ "    | * * |\r\n"
+					+ "    | * * |\r\n"
+					+ "    +-----+\r\n"
+					+ "");
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }
