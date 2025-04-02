@@ -136,6 +136,8 @@ public class GameManager {
 		crearJugadores(jugadores);
 		while (estadoJuego == true) {// juego
 			while (turno < ordenDeJuego.size()) {
+				System.out.println("-------------------------------------");
+				System.out.println("\nTURNO DE " + ordenDeJuego.get(turno).getNombre() + ":");
 				jugada = true;
 				while (jugada) {
 					ordenDeJuego.get(turno).jugar(); // en jugar están los 3 turnos
@@ -150,6 +152,7 @@ public class GameManager {
 				estadoJuego = false;
 			}
 		}
+		
 		if (!estadoJuego) { // cuando acaba una partida, para empezar un juego nuevo con nuevos jugadores
 			mostrarClasificacionOrdenada();
 			jugadores.clear();
@@ -171,7 +174,7 @@ public class GameManager {
 	// clasificación
 	public static void mostrarClasificacionOrdenada() {
 		for (int i = 0; i < ordenDeJuego.size(); i++) {
-			System.out.println("El jugador "+ ordenDeJuego.get(i).getNombre() + " ha puntuado: " + ordenDeJuego.get(i).puntuacionesJugador.getSumaPuntuacionFinal() + " puntos.");
+			System.out.println("\nEl jugador "+ ordenDeJuego.get(i).getNombre() + " ha puntuado: " + ordenDeJuego.get(i).puntuacionesJugador.getSumaPuntuacionFinal() + " puntos.");
 		}
 		
 		System.out.println("\nClasificación final:");

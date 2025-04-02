@@ -212,6 +212,7 @@ public class Puntuaciones {
 				"  -Cuatro Iguales: ", "  -FullHouse: ", "  -Escalera Pequeña: ", "  -Escalera Grande: ", "  -Chance: ",
 				"\n-Yahtzee: " };
 		// For para imprimir los valores y controlar la impresión
+		System.out.println("PUNTUACIONES POSIBLES:");
 		for (int i = 0; i < puntuaciones.size(); i++) {
 			if (puntuaciones.get(i) == 0) {
 				System.out.print(valores[i] + " ");
@@ -255,7 +256,7 @@ public class Puntuaciones {
 			}
 			do {
 				System.out.println(
-						"\nEscoge un valor para puntuar:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
+						"\nESCOGE UN VALOR PARA PUNTUAR:\n1.- Uno | 2.- Dos | 3.- Tres | 4.- Cuatro | 5.- Cinco | 6.- Seis "
 								+ "| 7.- Trio | 8.- Cuatro Iguales\n9.- FullHouse | 10.- Escalera Pequeña | 11.- Escalera Grande "
 								+ "| 12.- Chance | 13.- Yahtzee");
 				puntuar = sc.nextInt();
