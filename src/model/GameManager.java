@@ -21,7 +21,6 @@ public class GameManager {
 		switch (numeroMenu) {
 		case 1:
 			juego();
-			System.out.println("¡Empieza el juego!");
 			break;
 		case 2:
 			reglas();
@@ -136,6 +135,7 @@ public class GameManager {
 
 		crearJugadores(jugadores);
 		while (estadoJuego == true) {// juego
+			
 			while (turno < ordenDeJuego.size()) {
 				System.out.println("-------------------------------------");
 				System.out.println("\nTURNO DE " + ordenDeJuego.get(turno).getNombre() + ":");
