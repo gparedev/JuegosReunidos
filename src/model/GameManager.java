@@ -147,7 +147,6 @@ public class GameManager {
 				turno++;
 			}
 			turno = 0; // vuelve al turno del primer jugador
-			// estadoJuego = false; // con esto solo hay una ronda
 			turnoGlobal++;
 			if (turnoGlobal == 1) { // CAMBIAR A 13 PARA JUEGO COMPLETO. MÁXIMO 13 RONDAS
 				estadoJuego = false;
